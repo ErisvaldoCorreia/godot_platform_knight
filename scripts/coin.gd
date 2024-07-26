@@ -1,6 +1,7 @@
 extends Area2D
 
 @onready var gamemanager = $"../../gamemanager"
+@onready var animation_player = $AnimationPlayer
 
 # valida que um corpo entrou na area de colisão
 func _on_body_entered(_body):
@@ -9,4 +10,4 @@ func _on_body_entered(_body):
 	gamemanager.add_point()
 	
 	# remove a instância do objeto da cena
-	queue_free()
+	animation_player.play("pickup")
