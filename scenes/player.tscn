@@ -43,6 +43,7 @@ animations = [{
 size = Vector2(13, 18)
 
 [node name="player" type="CharacterBody2D"]
+z_index = 5
 position = Vector2(0, -12)
 script = ExtResource("1_cfl48")
 
