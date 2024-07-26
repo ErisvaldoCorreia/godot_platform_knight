@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://bkwdgbq8vk5wy"]
+[gd_scene load_steps=20 format=3 uid="uid://bkwdgbq8vk5wy"]
 
 [ext_resource type="Script" path="res://scripts/gamemanager.gd" id="1_1tp81"]
 [ext_resource type="PackedScene" uid="uid://diyldvybxmnk0" path="res://scenes/plataform.tscn" id="1_3t0y2"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://bfavipa1j6lwi" path="res://scenes/kilzone.tscn" id="5_0i68t"]
 [ext_resource type="PackedScene" uid="uid://d3yyh2s7akabx" path="res://scenes/slime.tscn" id="6_55yqe"]
 [ext_resource type="FontFile" uid="uid://dpf1jhbpyohuv" path="res://assets/fonts/PixelOperator8.ttf" id="7_yq1nx"]
+[ext_resource type="Texture2D" uid="uid://dohoab7mr2tt3" path="res://assets/sprites/coin.png" id="10_me7nc"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_t2jcn"]
 texture = ExtResource("1_u41x4")
@@ -510,19 +511,28 @@ _data = {
 [node name="gamemanager" type="Node2D" parent="."]
 script = ExtResource("1_1tp81")
 
-[node name="scoreLabel" type="Label" parent="gamemanager"]
-z_index = 1
-offset_left = 616.0
-offset_top = -71.0
-offset_right = 767.0
-offset_bottom = -48.0
-theme_override_colors/font_color = Color(0.0352941, 0.152941, 0.337255, 1)
+[node name="hud" type="CanvasLayer" parent="gamemanager"]
+scale = Vector2(4, 4)
+transform = Transform2D(4, 0, 0, 4, 0, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="gamemanager/hud"]
+position = Vector2(22, 15)
+scale = Vector2(1.625, 1.625)
+texture = ExtResource("10_me7nc")
+region_enabled = true
+region_rect = Rect2(0, 0, 16, 16)
+
+[node name="scorepoint" type="Label" parent="gamemanager/hud"]
+offset_left = 31.25
+offset_top = 11.5
+offset_right = 71.25
+offset_bottom = 34.5
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
 theme_override_fonts/font = ExtResource("2_wgp8h")
 theme_override_font_sizes/font_size = 8
-text = "Parabéns!Coletou x moeddas!"
-horizontal_alignment = 2
-vertical_alignment = 1
-autowrap_mode = 2
+text = "0"
+metadata/_edit_use_anchors_ = true
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = SubResource("TileSet_ylofx")
@@ -540,6 +550,9 @@ collision_layer = 2
 
 [node name="Camera2D" type="Camera2D" parent="player"]
 zoom = Vector2(4, 4)
+limit_left = 32
+limit_top = -80
+limit_right = 785
 limit_bottom = 160
 position_smoothing_enabled = true
 
