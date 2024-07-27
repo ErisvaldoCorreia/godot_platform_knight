@@ -1,10 +1,12 @@
 extends Area2D
 
 @onready var timer = $Timer
+@onready var collision_shape_2d = $CollisionShape2D
 
-func _on_body_entered(_body):
+func _on_body_entered(body):
 	print('você morreu')
-	Engine.time_scale = 0.5
+	body.die()
+	Engine.time_scale = 0.3
 	timer.start()
 
 
