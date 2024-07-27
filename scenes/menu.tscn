@@ -1,0 +1,89 @@
+[gd_scene load_steps=8 format=3 uid="uid://dplmjt6236lgf"]
+
+[ext_resource type="Texture2D" uid="uid://i0a3huckm762" path="res://assets/sprites/knight.png" id="1_3vi5p"]
+[ext_resource type="Script" path="res://scripts/menu.gd" id="1_aew17"]
+[ext_resource type="Texture2D" uid="uid://dn4tfy70s3e5n" path="res://assets/sprites/slime_green.png" id="2_tj2qr"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_frjhg"]
+atlas = ExtResource("1_3vi5p")
+region = Rect2(32, 96, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_6x07r"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_frjhg")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xlmec"]
+atlas = ExtResource("2_tj2qr")
+region = Rect2(48, 24, 24, 24)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_gmvcf"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xlmec")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.8, 1.8)
+script = ExtResource("1_aew17")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 0
+offset_left = 273.333
+offset_top = 143.333
+offset_right = 363.333
+offset_bottom = 209.333
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="play" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Play Game"
+
+[node name="quit" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Exit Game"
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 231.111
+offset_top = 70.5556
+offset_right = 412.111
+offset_bottom = 112.556
+theme_override_colors/font_color = Color(0.858824, 0.360784, 0.0196078, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 7
+theme_override_font_sizes/font_size = 30
+text = "Knight Coins"
+
+[node name="player" type="AnimatedSprite2D" parent="."]
+position = Vector2(145, 145)
+scale = Vector2(4.42361, 4.42361)
+sprite_frames = SubResource("SpriteFrames_6x07r")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(487.222, 142.222)
+scale = Vector2(4.55093, 4.55093)
+sprite_frames = SubResource("SpriteFrames_gmvcf")
+flip_h = true
+
+[connection signal="pressed" from="MarginContainer/VBoxContainer/play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/quit" to="." method="_on_quit_pressed"]
