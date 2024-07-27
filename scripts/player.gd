@@ -6,9 +6,11 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 @onready var animated_sprite_2d = $AnimatedSprite2D
 var is_dead = false
 @onready var collision_shape_2d = $CollisionShape2D
+@onready var gmover = $"../gamemanager/hud/gmover"
 
 func _physics_process(delta):
 	if is_dead:
+		gmover.visible = true
 		collision_shape_2d.disabled = true
 		return  # Não processa nada se o player estiver morto
 	

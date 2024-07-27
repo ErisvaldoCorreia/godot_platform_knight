@@ -1,12 +1,14 @@
-[gd_scene load_steps=20 format=3 uid="uid://bkwdgbq8vk5wy"]
+[gd_scene load_steps=22 format=3 uid="uid://bkwdgbq8vk5wy"]
 
 [ext_resource type="Script" path="res://scripts/gamemanager.gd" id="1_1tp81"]
 [ext_resource type="PackedScene" uid="uid://diyldvybxmnk0" path="res://scenes/plataform.tscn" id="1_3t0y2"]
 [ext_resource type="PackedScene" uid="uid://gswmkbf2dhih" path="res://scenes/player.tscn" id="1_rb30c"]
 [ext_resource type="Texture2D" uid="uid://b3iydr6davtwg" path="res://assets/sprites/world_tileset.png" id="1_u41x4"]
 [ext_resource type="FontFile" uid="uid://b2we3r5fd0jlm" path="res://assets/fonts/PixelOperator8-Bold.ttf" id="2_wgp8h"]
+[ext_resource type="Texture2D" uid="uid://shdg61jbv6eh" path="res://assets/sprites/gm.png" id="4_1i8ly"]
 [ext_resource type="PackedScene" uid="uid://dsbi4o0n566ra" path="res://scenes/coin.tscn" id="4_noahu"]
 [ext_resource type="PackedScene" uid="uid://bfavipa1j6lwi" path="res://scenes/kilzone.tscn" id="5_0i68t"]
+[ext_resource type="Texture2D" uid="uid://bgda3mp6kjeo2" path="res://assets/sprites/win.png" id="5_ntup7"]
 [ext_resource type="PackedScene" uid="uid://d3yyh2s7akabx" path="res://scenes/slime.tscn" id="6_55yqe"]
 [ext_resource type="FontFile" uid="uid://dpf1jhbpyohuv" path="res://assets/fonts/PixelOperator8.ttf" id="7_yq1nx"]
 [ext_resource type="Texture2D" uid="uid://dohoab7mr2tt3" path="res://assets/sprites/coin.png" id="10_me7nc"]
@@ -534,6 +536,21 @@ theme_override_font_sizes/font_size = 8
 text = "0"
 metadata/_edit_use_anchors_ = true
 
+[node name="gmover" type="Sprite2D" parent="gamemanager/hud"]
+visible = false
+position = Vector2(143.25, 80.75)
+scale = Vector2(0.0374244, 0.0374244)
+texture = ExtResource("4_1i8ly")
+
+[node name="win" type="Sprite2D" parent="gamemanager/hud"]
+visible = false
+position = Vector2(142.5, 78.75)
+scale = Vector2(0.174306, 0.174306)
+texture = ExtResource("5_ntup7")
+
+[node name="end" type="Timer" parent="gamemanager"]
+one_shot = true
+
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = SubResource("TileSet_ylofx")
 format = 2
@@ -633,7 +650,7 @@ offset_bottom = 92.0
 theme_override_colors/font_color = Color(0.368627, 0.815686, 0.764706, 1)
 theme_override_fonts/font = ExtResource("7_yq1nx")
 theme_override_font_sizes/font_size = 8
-text = "Colete as moedas!!"
+text = "Colete 10  moedas!!"
 
 [node name="Label2" type="Label" parent="labels"]
 offset_left = 123.0
@@ -644,3 +661,5 @@ theme_override_colors/font_color = Color(0.0352941, 0.152941, 0.337255, 1)
 theme_override_fonts/font = ExtResource("7_yq1nx")
 theme_override_font_sizes/font_size = 8
 text = "Cuidado com os slimes"
+
+[connection signal="timeout" from="gamemanager/end" to="gamemanager" method="_on_end_timeout"]
